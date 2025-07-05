@@ -1,19 +1,17 @@
 const Eris = require("eris");
 const keep_alive = require('./keep_alive.js');
 
-// Khởi tạo bot
-const bot = new Eris(process.env.token, {
-  intents: [] 
-});
+// Tạo bot
+const bot = new Eris(process.env.token);
 
-// Sự kiện khi bot sẵn sàng
+// Khi bot đã sẵn sàng
 bot.on("ready", () => {
   console.log(`✅ Bot đã đăng nhập với tên: ${bot.user.username}`);
 
-  // Đặt trạng thái và hoạt động (nếu muốn)
+  // Thiết lập trạng thái
   bot.editStatus("idle", {
     name: "...",
-    type: 3               
+    type: 3 // Watching
   });
 });
 
