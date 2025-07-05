@@ -1,11 +1,17 @@
 const Eris = require("eris");
-const keep_alive = require('./keep_alive.js')
+const keep_alive = require('./keep_alive.js');
 
-// Replace TOKEN with your bot account's token
-const bot = new Eris(process.env.token);
-
-bot.on("error", (err) => {
-  console.error(err); // or your preferred logger
+// Tạo bot với trạng thái
+const bot = new Eris(process.env.token, {
+  intents: [], 
+  initialPresence: {
+    status: "idle", // "online" | "idle" | "dnd" | "invisible"
+  },
 });
 
-bot.connect(); // Get the bot to connect to Discord
+bot.on("ready", () => {
+  console.log(`✅ Bot đã đăng nhập với tên: ${bot.user.username}`);
+});
+
+bot.on("error", console.error);
+bot.connect();
